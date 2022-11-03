@@ -198,6 +198,7 @@ public class Lavatrice
         Console.WriteLine("Stato: " + Stato);
         Console.WriteLine("Detersivo: " + (Detersivo - ConsumoDetersivo) + "ml");
         Console.WriteLine("Ammorbidente: " + (Ammorbidente - ConsumoAmmorbidente) + "ml");
+        Console.WriteLine("Durata totale lavaggio: " + Durata);
         Console.WriteLine("Tempo rimasto alla fine del lavaggio: " + (Durata - durataPassata));
 
     }
@@ -249,6 +250,8 @@ public class Asciugatrice
         Console.WriteLine("-------------");
         Console.WriteLine("Nome macchina: " + Nome);
         Console.WriteLine("Stato: " + Stato);
+        Console.WriteLine("Durata totale asciugatura: " + Durata );
+
         Console.WriteLine("Tempo rimasto alla fine del lavaggio: " + (Durata - durataPassata));
     }
     public void Asciugatura()
