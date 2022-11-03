@@ -192,10 +192,17 @@ public class Lavatrice
         else
             durataPassata = 0;
 
+        string vuota = "Spenta";
+
+        if(Stato != "vuota")
+        {
+            vuota = "Accesa";
+        }
 
         Console.WriteLine("-------------");
         Console.WriteLine("Nome macchina: " + Nome);
-        Console.WriteLine("Stato: " + Stato);
+        Console.WriteLine("Stato: " + vuota);
+        Console.WriteLine("Lavaggio: " + Stato);
         Console.WriteLine("Detersivo: " + (Detersivo - ConsumoDetersivo) + "ml");
         Console.WriteLine("Ammorbidente: " + (Ammorbidente - ConsumoAmmorbidente) + "ml");
         Console.WriteLine("Durata totale lavaggio: " + Durata);
@@ -247,11 +254,20 @@ public class Asciugatrice
         }
         else
             durataPassata = 0;
+
+
+        string vuota = "Spenta";
+
+        if (Stato != "vuota")
+        {
+            vuota = "Accesa";
+        }
+
         Console.WriteLine("-------------");
         Console.WriteLine("Nome macchina: " + Nome);
-        Console.WriteLine("Stato: " + Stato);
+        Console.WriteLine("Stato: " + vuota);
+        Console.WriteLine("Programma: " + Stato);
         Console.WriteLine("Durata totale asciugatura: " + Durata );
-
         Console.WriteLine("Tempo rimasto alla fine del lavaggio: " + (Durata - durataPassata));
     }
     public void Asciugatura()
