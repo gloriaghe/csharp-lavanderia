@@ -42,17 +42,19 @@ public class Asciugatrice : MacchineLavanderia
         CostoLavaggio = 4;
         Stato = "Intenso";
     }
-    public override void StampaDettagli()
+    public override void StampaDettagli(bool nuova)
     {
         int durataPassata = 0;
-        if (Durata != 0)
+        if (nuova == false)
         {
-            Random random = new Random();
-            durataPassata = random.Next(1, (Durata - 5));
+            if (Durata != 0)
+            {
+                Random random = new Random();
+                durataPassata = random.Next(1, (Durata - 5));
+            }
+            else
+                durataPassata = 0;
         }
-        else
-            durataPassata = 0;
-
 
         string vuota = "Spenta";
 
@@ -76,6 +78,16 @@ public class Asciugatrice : MacchineLavanderia
         if (sceltaLavaggio == 1)
             Rapido();
         else if (sceltaLavaggio == 2)
+            Intenso();
+
+    }
+    public void AsciugaturaScelta(int sceltaasciugatura)
+    {
+
+
+        if (sceltaasciugatura == 1)
+            Rapido();
+        else if (sceltaasciugatura == 2)
             Intenso();
 
     }

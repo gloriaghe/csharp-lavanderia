@@ -17,9 +17,12 @@
 
 
 
+using System.Security.Cryptography.X509Certificates;
+
 
 
 public class Lavanderia
+
 {
     public Lavanderia()
     {
@@ -49,10 +52,101 @@ public class Lavanderia
     public void DettagliMacchina(string macchina, int numero)
     {
         if (macchina == "lavatrice")
-            lavatrici[numero].StampaDettagli();
+            lavatrici[numero].StampaDettagli(false);
         else
-            asciugatrici[numero].StampaDettagli();
+            asciugatrici[numero].StampaDettagli(false);
     }
+
+    public void StartLavatrici()
+    {
+        for (int i = 0; i < lavatrici.Length; i++)
+        {
+            lavatrici[i].Lavaggio();
+        }
+    }
+    public void StartAsciugatrici()
+    {
+        for (int i = 0; i < asciugatrici.Length; i++)
+        {
+
+            asciugatrici[i].Asciugatura();
+        }
+    }
+    public void StartLavatrice()
+    {
+        bool trovata = false;
+        string scelta = "";
+            Lavatrice lavatrice = null;
+        for (int i = 0; i < lavatrici.Length; i++)
+        {
+            if (lavatrici[i].Stato == "vuota")
+            {
+                Console.WriteLine("Trovata lavatrice vuota. Vuoi scegliere il lavaggio? SI o NO");
+                 scelta = Console.ReadLine();
+                trovata = true;
+                lavatrice = lavatrici[i];
+                break;
+                
+            }
+        }
+            if (trovata)
+            {
+                if (scelta == "SI")
+                {
+                    Console.WriteLine("Premi 1 per Rinfrescante, 2 per rinnovante e 3 per sgrassante");
+                    int sceltalavaggio = Convert.ToInt32(Console.ReadLine());
+
+                lavatrice.LavaggioScelta(sceltalavaggio);
+                    
+                    lavatrice.StampaDettagli(true);
+                }
+                else
+                    Console.WriteLine("Ok. A presto!");
+            }
+            else
+            {
+                Console.WriteLine("Purtroppo non ci sono lavatrici vuote. Torna più tardi.");
+            }
+
+    }
+    public void StartAsciugatrice()
+    {
+        bool trovata = false;
+        string scelta = "";
+        Asciugatrice asciugatrice = null;
+        for (int i = 0; i < asciugatrici.Length; i++)
+        {
+            if (asciugatrici[i].Stato == "vuota")
+            {
+                Console.WriteLine("Trovata asciugatrice vuota. Vuoi scegliere il programma? SI o NO");
+                scelta = Console.ReadLine();
+                trovata = true;
+                asciugatrice = asciugatrici[i];
+                break;
+
+            }
+        }
+        if (trovata)
+        {
+            if (scelta == "SI")
+            {
+                Console.WriteLine("Premi 1 per Rapido, 2 per Intenso");
+                int sceltaasciugatura = Convert.ToInt32(Console.ReadLine());
+
+                asciugatrice.AsciugaturaScelta(sceltaasciugatura);
+
+                asciugatrice.StampaDettagli(true);
+            }
+            else
+                Console.WriteLine("Ok. A presto!");
+        }
+        else
+        {
+            Console.WriteLine("Purtroppo non ci sono asciugatrici vuote. Torna più tardi.");
+        }
+
+    }
+
     public void Incasso()
     {
         Console.WriteLine("Incassi:");
@@ -65,23 +159,4 @@ public class Lavanderia
         }
         Console.WriteLine("Totale: " + incassoTotale + " Euro");
     }
-    public void StartLavatrici()
-    {
-        for (int i = 0; i < lavatrici.Length; i++)
-        {
-
-            lavatrici[i].Lavaggio();
-
-        }
-    }
-    public void StartAsciugatrici()
-    {
-        for (int i = 0; i < asciugatrici.Length; i++)
-        {
-
-            asciugatrici[i].Asciugatura();
-
-        }
-    }
-
 }

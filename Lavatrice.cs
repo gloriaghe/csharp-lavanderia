@@ -21,13 +21,13 @@
 
 public class Lavatrice : MacchineLavanderia
 {
-   
+
     public int ConsumoDetersivo { get; set; }
     public int ConsumoAmmorbidente { get; set; }
 
     public int Detersivo { get; set; }
     public int Ammorbidente { get; set; }
-  
+
 
     public Lavatrice(string nome)
     {
@@ -64,7 +64,7 @@ public class Lavatrice : MacchineLavanderia
     public void Lavaggio()
     {
         Random random = new Random();
-        int sceltaLavaggio = random.Next(1, 5);
+        int sceltaLavaggio = random.Next(1, 6);
 
         if (sceltaLavaggio == 1)
             Rinfrescante();
@@ -75,21 +75,36 @@ public class Lavatrice : MacchineLavanderia
 
     }
 
+    public void LavaggioScelta(int sceltalavaggio)
+    {
 
-    public override void StampaDettagli()
+
+        if (sceltalavaggio == 1)
+            Rinfrescante();
+        else if (sceltalavaggio == 2)
+            Rinnovante();
+        else if (sceltalavaggio == 3)
+            Sgrassante();
+    }
+    public override void StampaDettagli(bool nuova)
     {
         int durataPassata = 0;
-        if (Durata != 0)
+        if (nuova == false)
         {
-            Random random = new Random();
-            durataPassata = random.Next(1, (Durata - 5));
+            if (Durata != 0)
+            {
+                Random random = new Random();
+                durataPassata = random.Next(1, (Durata - 5));
+            }
+            else
+                durataPassata = 0;
+
         }
-        else
-            durataPassata = 0;
+
 
         string vuota = "Spenta";
 
-        if(Stato != "vuota")
+        if (Stato != "vuota")
         {
             vuota = "Accesa";
         }

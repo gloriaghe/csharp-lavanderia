@@ -20,6 +20,8 @@ Console.WriteLine("Cosa vuoi sapere? ");
 Console.WriteLine("Premi 1 per sapere lo stato delle macchine");
 Console.WriteLine("Premi 2 per avere i dettagli delle macchine");
 Console.WriteLine("Premi 3 per sapere l'incasso");
+Console.WriteLine("Premi 4 far partire un programma");
+
 
 int sceltaUser = Convert.ToInt32(Console.ReadLine());
 
@@ -44,7 +46,28 @@ else if (sceltaUser == 2)
 }
 else if (sceltaUser == 3)
 {
+
     lavanderia.Incasso();
+}
+else if (sceltaUser == 4)
+{
+
+    Console.WriteLine("Premi 1 per accendere una lavatrice");
+    Console.WriteLine("Premi 2 per accendere una asciugatrice");
+    int sceltaStart = Convert.ToInt32(Console.ReadLine());
+    if(sceltaStart == 1)
+    {
+        lavanderia.StartLavatrice();
+
+    }else if(sceltaStart == 2)
+    {
+        lavanderia.StartAsciugatrice();
+    }
+    else
+    {
+        Console.WriteLine("ERRORE");
+
+    }
 }
 else
 {

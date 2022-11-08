@@ -19,13 +19,13 @@
 
 
 
-public abstract class MacchineLavanderia
+public abstract class MacchineLavanderia 
 {
     public string Nome { get; protected set; }
     public int Durata { get; protected set; }
     public string Stato { get; protected set; }
     public int CostoLavaggio { get; protected set; }
-    public abstract void StampaDettagli();
+    public abstract void StampaDettagli(bool nuova);
 
     public abstract double Incasso();
 
