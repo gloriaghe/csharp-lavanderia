@@ -16,38 +16,71 @@
 //3 - l’attuale incasso generato dall’utilizzo delle macchine.
 
 
-Console.WriteLine("Cosa vuoi sapere? ");
-Console.WriteLine("Premi 1 per sapere lo stato delle macchine");
-Console.WriteLine("Premi 2 per avere i dettagli delle macchine");
-Console.WriteLine("Premi 3 per sapere l'incasso");
 
-int sceltaUser = Convert.ToInt32(Console.ReadLine());
 
-Lavanderia lavanderia = new Lavanderia();
-lavanderia.StartLavatrici();
-lavanderia.StartAsciugatrici();
 
-if (sceltaUser == 1)
+public class Asciugatrice : MacchineLavanderia
 {
-    lavanderia.StatoMacchine();
-
-}
-else if (sceltaUser == 2)
-{
-    for (int i = 0; i < 5; i++)
+    
+    public Asciugatrice(string nome)
     {
-        lavanderia.DettagliMacchina("lavatrice", i);
-        lavanderia.DettagliMacchina("asciugatrice", i);
+        this.Nome = nome;
+        this.Stato = "vuota";
+
     }
 
+    public void Rapido()
+    {
+        Durata = 30;
+        CostoLavaggio = 2;
+        Stato = "Rapido";
 
-}
-else if (sceltaUser == 3)
-{
-    lavanderia.Incasso();
-}
-else
-{
-    Console.WriteLine("Scelta errata");
+    }
+    public void Intenso()
+    {
+        Durata = 60;
+        CostoLavaggio = 4;
+        Stato = "Intenso";
+    }
+    public override void StampaDettagli()
+    {
+        int durataPassata = 0;
+        if (Durata != 0)
+        {
+            Random random = new Random();
+            durataPassata = random.Next(1, (Durata - 5));
+        }
+        else
+            durataPassata = 0;
 
+
+        string vuota = "Spenta";
+
+        if (Stato != "vuota")
+        {
+            vuota = "Accesa";
+        }
+
+        Console.WriteLine("-------------");
+        Console.WriteLine("Nome macchina: " + Nome);
+        Console.WriteLine("Stato: " + vuota);
+        Console.WriteLine("Programma: " + Stato);
+        Console.WriteLine("Durata totale asciugatura: " + Durata );
+        Console.WriteLine("Tempo rimasto alla fine del lavaggio: " + (Durata - durataPassata));
+    }
+    public void Asciugatura()
+    {
+        Random random = new Random();
+        int sceltaLavaggio = random.Next(1, 5);
+
+        if (sceltaLavaggio == 1)
+            Rapido();
+        else if (sceltaLavaggio == 2)
+            Intenso();
+
+    }
+    public override double Incasso()
+    {
+        return CostoLavaggio * 0.50;
+    }
 }

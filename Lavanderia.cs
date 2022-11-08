@@ -16,38 +16,72 @@
 //3 - l’attuale incasso generato dall’utilizzo delle macchine.
 
 
-Console.WriteLine("Cosa vuoi sapere? ");
-Console.WriteLine("Premi 1 per sapere lo stato delle macchine");
-Console.WriteLine("Premi 2 per avere i dettagli delle macchine");
-Console.WriteLine("Premi 3 per sapere l'incasso");
 
-int sceltaUser = Convert.ToInt32(Console.ReadLine());
 
-Lavanderia lavanderia = new Lavanderia();
-lavanderia.StartLavatrici();
-lavanderia.StartAsciugatrici();
 
-if (sceltaUser == 1)
+public class Lavanderia
 {
-    lavanderia.StatoMacchine();
-
-}
-else if (sceltaUser == 2)
-{
-    for (int i = 0; i < 5; i++)
+    public Lavanderia()
     {
-        lavanderia.DettagliMacchina("lavatrice", i);
-        lavanderia.DettagliMacchina("asciugatrice", i);
+        lavatrici = new Lavatrice[5];
+        asciugatrici = new Asciugatrice[5];
+
+        for (int i = 0; i < 5; i++)
+        {
+            lavatrici[i] = new Lavatrice("Lavatrice" + (i + 1));
+            asciugatrici[i] = new Asciugatrice("Asciugatrice" + (i + 1));
+
+        }
     }
+    private Lavatrice[] lavatrici;
+    private Asciugatrice[] asciugatrici;
 
+    public void StatoMacchine()
+    {
+        Console.WriteLine("Stato: ");
+        for (int i = 0; i < 5; i++)
+        {
+            Console.WriteLine(lavatrici[i].Nome + ": " + lavatrici[i].Stato);
+            Console.WriteLine(asciugatrici[i].Nome + ": " + asciugatrici[i].Stato);
+        }
 
-}
-else if (sceltaUser == 3)
-{
-    lavanderia.Incasso();
-}
-else
-{
-    Console.WriteLine("Scelta errata");
+    }
+    public void DettagliMacchina(string macchina, int numero)
+    {
+        if (macchina == "lavatrice")
+            lavatrici[numero].StampaDettagli();
+        else
+            asciugatrici[numero].StampaDettagli();
+    }
+    public void Incasso()
+    {
+        Console.WriteLine("Incassi:");
+        double incassoTotale = 0;
+        for (int i = 0; i < lavatrici.Length; i++)
+        {
+            Console.WriteLine(lavatrici[i].Nome + ": " + lavatrici[i].Incasso() + " Euro");
+            Console.WriteLine(asciugatrici[i].Nome + ": " + asciugatrici[i].Incasso() + " Euro");
+            incassoTotale = incassoTotale + lavatrici[i].Incasso() + asciugatrici[i].Incasso();
+        }
+        Console.WriteLine("Totale: " + incassoTotale + " Euro");
+    }
+    public void StartLavatrici()
+    {
+        for (int i = 0; i < lavatrici.Length; i++)
+        {
+
+            lavatrici[i].Lavaggio();
+
+        }
+    }
+    public void StartAsciugatrici()
+    {
+        for (int i = 0; i < asciugatrici.Length; i++)
+        {
+
+            asciugatrici[i].Asciugatura();
+
+        }
+    }
 
 }

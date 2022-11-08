@@ -16,38 +16,17 @@
 //3 - l’attuale incasso generato dall’utilizzo delle macchine.
 
 
-Console.WriteLine("Cosa vuoi sapere? ");
-Console.WriteLine("Premi 1 per sapere lo stato delle macchine");
-Console.WriteLine("Premi 2 per avere i dettagli delle macchine");
-Console.WriteLine("Premi 3 per sapere l'incasso");
 
-int sceltaUser = Convert.ToInt32(Console.ReadLine());
 
-Lavanderia lavanderia = new Lavanderia();
-lavanderia.StartLavatrici();
-lavanderia.StartAsciugatrici();
 
-if (sceltaUser == 1)
+public abstract class MacchineLavanderia
 {
-    lavanderia.StatoMacchine();
+    public string Nome { get; protected set; }
+    public int Durata { get; protected set; }
+    public string Stato { get; protected set; }
+    public int CostoLavaggio { get; protected set; }
+    public abstract void StampaDettagli();
 
-}
-else if (sceltaUser == 2)
-{
-    for (int i = 0; i < 5; i++)
-    {
-        lavanderia.DettagliMacchina("lavatrice", i);
-        lavanderia.DettagliMacchina("asciugatrice", i);
-    }
-
-
-}
-else if (sceltaUser == 3)
-{
-    lavanderia.Incasso();
-}
-else
-{
-    Console.WriteLine("Scelta errata");
+    public abstract double Incasso();
 
 }
